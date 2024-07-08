@@ -1,0 +1,49 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package inventariodemaf;
+
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author RubiXD
+ */
+public class Rol {
+    
+    //Atributos de la clase
+    private String mNombre;
+    private String mDescripcion;
+
+    /**
+     * @return the rNombre
+     */
+    public String getNombre() {
+        return mNombre;
+    }
+
+    /**
+     * @param mNombre the mNombre to set
+     */
+    public void setNombre(String pNombre) {
+        this.mNombre = pNombre;
+    }
+
+    /**
+     * @return the rDescripcion
+     */
+    public String getDescripcion() {
+        return mDescripcion;
+    }
+
+    /**
+     * @param rDescripcion the rDescripcion to set
+     */
+    public void setDescripcion(String pDescripcion) {
+        this.mDescripcion = pDescripcion;
+    }
+    
+    
+    
+}
