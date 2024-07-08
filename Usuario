@@ -1,0 +1,74 @@
+package inventariodemaf;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author oswal
+ */
+public class Usuario {
+    
+    private String mNombre;
+    private String mPass;
+    private String mIdEmpleado;
+    private ArrayList<Rol> mListaRoles = new ArrayList();
+
+    /**
+     * @return the mNombre
+     */
+    public String getNombre() {
+        return mNombre;
+    }
+
+    /**
+     * @param mNombre the mNombre to set
+     */
+    public void setNombre(String mNombre) {
+        this.mNombre = mNombre;
+    }
+
+    /**
+     * @return the mPass
+     */
+    public String getPass() {
+        return mPass;
+    }
+
+    /**
+     * @param mPass the mPass to set
+     */
+    public void setPass(String mPass) {
+        this.mPass = mPass;
+    }
+
+    /**
+     * @return the mCorreoElectronico
+     */
+    public String getIdEmpleado() {
+        return mIdEmpleado;
+    }
+
+    /**
+     * @param mIdEmpleado the mCorreoElectronico to set
+     */
+    public void setIdEmpleado(String mIdEmpleado) {
+        this.mIdEmpleado = mIdEmpleado;
+    }
+
+    /**
+     * @return the mListaRoles
+     */
+    public ArrayList<Rol> getListaRoles() {
+        return mListaRoles;
+    }
+
+    /**
+     * @param mListaRoles the mListaRoles to set
+     */
+    public void setListaRoles(ArrayList<Rol> mListaRoles) {
+        this.mListaRoles = mListaRoles;
+    }
+
+    
+    
+}
