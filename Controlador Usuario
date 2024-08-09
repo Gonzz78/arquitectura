@@ -1,0 +1,90 @@
+package Controlador;
+
+import Modelo.MDB;
+import Vista.frmUsuarios;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
+/**
+ *
+ * @author oswaldo
+ */
+
+public class controladorUsuario implements ActionListener{
+    public frmUsuarios _view; //el formulario
+    public MDB _model;//el manejador de bases de datos
+    
+    public controladorUsuario (frmUsuarios view, MDB model){
+        this._model=model;
+        this._view=view;
+
+        this._view.cmdAlta.addActionListener(this);//se obtiene el control sobre el botón alta del formulario
+        this._view.cmdEliminar.addActionListener(this);//se obtiene el control de botón eliminar
+        this._view.cmdModificar.addActionListener(this);
+        this._view.cmdBuscar.addActionListener(this);
+    }
+
+    
+    @Override
+
+
+    public void actionPerformed(ActionEvent e) {
+        String leyenda="";//esta variable servirá para atrapar los errores sql
+        int i,j;
+        Object[] a=new Object[4];
+        List<ArrayList<String>> datosObtenidos= new ArrayList<ArrayList<String>>();
+	ArrayList<String> renglonObtenido = new ArrayList<String>();
+        DefaultTableModel modelTa = new DefaultTableModel();
+        modelTa.addColumn("Id");
+        modelTa.addColumn("nombre");
+        modelTa.addColumn("usuario");
+        modelTa.addColumn("psw");
+
+        if (e.getSource()==this._view.cmdAlta){ //Si el botón presionado fue el de alta
+            leyenda=_model.registrarAlta("tbusuarios","'"+ _view.txtId.getText()+"','"+_view.txtNom.getText()+"','"+_view.txtUser.getText()+"','"+_view.txtContra.getText() +"'");
+            //Se puede usar una variable o el control, lo ideal es que se pudiera llamar una función de validación aquí sobre los datos obtenidos de las cajas de texto
+            JOptionPane.showMessageDialog(null, leyenda);//Se manda mensaje con el resultado de la consulta de inserción
+            limpiar();//se limpian las cajas de texto
+            //agregar otros botones si se necesitan implementar
+        }
+        if(e.getSource()==this._view.cmdEliminar){
+            leyenda=_model.borrarRegistro("TbUsuarios", "id ="+this._view.txtId.getText());
+            JOptionPane.showMessageDialog(null, leyenda);
+            limpiar();
+        }
+        if(e.getSource()==this._view.cmdModificar){
+            leyenda=_model.modificarRegistro("Tbusuarios","nombre='"+_view.txtNom.getText()+"',usuario='"+_view.txtUser.getText()+"',psw='"+_view.txtContra.getText() +"'" , "id ="+this._view.txtId.getText());
+            JOptionPane.showMessageDialog(null, leyenda);
+            limpiar();
+        }
+        if(e.getSource()==this._view.cmdBuscar){
+            datosObtenidos=_model.consultarDatos("tbUsuarios", "id , nombre,usuario, psw", "id ="+this._view.txtId.getText());
+
+            for(i=0;i<datosObtenidos.size();i++)
+		{
+                    renglonObtenido = datosObtenidos.get(i);
+                    for(j=0;j<renglonObtenido.size();j++){
+                        a[j]=renglonObtenido.get(j);
+                    }
+                    modelTa.addRow(a);
+		}
+            this._view.tbUsuarios.setModel(modelTa);
+            limpiar();
+        }
+    }
+
+    public void iniciar(){
+    _view.setTitle("MVC_Visual"); 
+    }
+
+    public void limpiar(){
+        _view.txtNom.setText(null);
+        _view.txtUser.setText(null);
+        _view.txtContra.setText(null);
+    }
+
+}
